@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Ambe Realtors | Premium GMADA Properties</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.png">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #0F172A; /* Deep Navy */
+            --secondary: #1E293B; /* Lighter Navy */
+            --gold: #D4AF37; /* Luxury Gold */
+            --gold-light: #F3E5AB;
+            --text-light: #F8FAFC;
+            --text-dark: #334155;
+            --white: #ffffff;
+            --nav-height: 80px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            padding-bottom: 60px; /* Space for fixed footer */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding { padding: 80px 0; }
+        
+        .gold-text { color: var(--gold); }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), #b39025);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            border: 1px solid var(--gold);
+        }
+        
+        .btn-gold:hover {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 15px auto;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background: var(--primary);
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between; /* Pushes Logo left, Links right */
+            align-items: center;
+            width: 100%; /* Ensures it takes up the full container width */
+        }
+        
+        /* Ensure the container inside the header is also full width */
+        header .container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo svg { height: 40px; fill: var(--gold); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--text-light); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        /* --- STATS SECTION --- */
+        .stats {
+            background: var(--gold);
+            color: var(--primary);
+            padding: 40px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item h3 { font-size: 2.5rem; margin-bottom: 5px; color: var(--primary); }
+        .stat-item p { font-weight: 600; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* --- SERVICES (Modular Cards) --- */
+        .services { background: var(--white); }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 40px;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .service-card i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        /* --- PROJECTS --- */
+        .projects { background: #f8fafc; }
+        
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--white);
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .project-content { padding: 30px; border-left: 5px solid var(--gold); }
+        .tag {
+            background: var(--primary);
+            color: var(--gold);
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* --- FOUNDER SECTION --- */
+        .founder {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .founder-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .founder-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-color: #334155; /* Placeholder gray */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--gold);
+            position: relative;
+        }
+        
+        .founder-image::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--gold);
+            z-index: 0;
+        }
+
+        .founder-img-placeholder {
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: url('https://placehold.co/400x500/1e293b/d4af37?text=Happy') center/cover;
+        }
+
+        .founder-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .founder-text h2 { color: var(--gold); margin-bottom: 10px; }
+        .founder-text h4 { font-family: 'Montserrat', sans-serif; font-weight: 300; margin-bottom: 20px; }
+
+        /* --- CONTACT & FOOTER --- */
+        .contact { background: var(--white); }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        /* --- UPDATED CONTACT TEXT SIZE --- */
+        .contact-info-item {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px; /* More space between icon and text */
+        }
+        
+        .contact-info-item i { 
+            color: var(--gold); 
+            font-size: 2.2rem; /* Much larger icon */
+            margin-top: 5px; 
+        }
+
+        .contact-info-item h4 {
+            font-size: 1.5rem; /* Large Heading (Head Office/Call Us) */
+            font-weight: 800; /* Extra Bold */
+            color: var(--primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .contact-info-item p {
+            font-size: 1.25rem; /* Larger Address/Phone text */
+            font-weight: 500;
+            line-height: 1.5;
+            color: #334155;
+        }
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+        }
+
+        /* --- FIXED BOTTOM BAR --- */
+        .fixed-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--primary);
+            color: var(--white);
+            padding: 15px;
+            text-align: center;
+            z-index: 999;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fixed-bottom-bar a {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* --- FINAL PROMINENT WHATSAPP "SPEAKING" STYLE --- */
+        /* --- UPDATED CHATBOT BUBBLE (Replaces WhatsApp) --- */
+        .whatsapp-wrapper {
+            position: fixed;
+            bottom: 85px; 
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; 
+        }
+
+        .whatsapp-text {
+            position: relative; 
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 800; 
+            border: 3px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+            margin-bottom: 18px; 
+            white-space: nowrap;
+        }
+
+        .whatsapp-text::after {
+            content: '';
+            position: absolute;
+            bottom: -14px; 
+            right: 25px; 
+            border-width: 15px 15px 0;
+            border-style: solid;
+            border-color: var(--gold) transparent transparent transparent;
+            z-index: -1; 
+        }
+
+        .whatsapp-float {
+            /* Changed from Green to Brand Navy */
+            background-color: var(--primary);
+            /* Changed icon color to Gold */
+            color: var(--gold);
+            width: 65px; 
+            height: 65px; 
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            border: 3px solid var(--gold);
+            box-shadow: 2px 5px 15px rgba(0,0,0,0.4); 
+            text-decoration: none;
+            animation: pop-pulse 2s infinite;
+            transition: 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            /* Slightly lighter navy on hover */
+            background-color: var(--secondary);
+            animation: none; 
+            transform: scale(1.05);
+            color: var(--white); /* Icon turns white on hover for contrast */
+        }
+
+        /* Updated animation shadow to match Navy Blue */
+        @keyframes pop-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(15, 23, 42, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(15, 23, 42, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(15, 23, 42, 0); }
+        }
+
+        /* Animation Keyframes (Unchanged but included for completeness) */
+        @keyframes pop-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for this demo */
+            .logo { font-size: 1.2rem; }
+            .founder-image { height: 300px; }
+            .founder-wrapper { flex-direction: column-reverse; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <svg viewBox="0 0 100 100">
+                        <path d="M10,90 L50,10 L90,90" fill="none" stroke="#D4AF37" stroke-width="5" />
+                        <text x="50" y="75" font-family="serif" font-size="30" fill="white" text-anchor="middle" font-weight="bold">SAR</text>
+                    </svg>
+                    SRI AMBE REALTORS
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Expertise</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#founder">Leadership</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>The Gold Standard in <br><span class="gold-text">Mohali Real Estate</span></h1>
+            <p>Specializing in GMADA Projects, Letter of Intents (LOIs), and Agricultural Lands.</p>
+            <a href="#contact" class="btn-gold">Start Your Investment</a>
+        </div>
+    </section>
+
+    <section class="stats" id="about">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>2016</h3>
+                    <p>Established</p>
+                </div>
+                <div class="stat-item">
+                    <h3>2500+</h3>
+                    <p>Deals Concluded</p>
+                </div>
+                <div class="stat-item">
+                    <h3>10,000+</h3>
+                    <p>Trusted Clients</p>
+                </div>
+                <div class="stat-item">
+                    <h3>#1</h3>
+                    <p>Firm in Mohali</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Expertise</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-file-contract"></i>
+                    <h3>GMADA LOIs</h3>
+                    <p>We specialize in Letters of Intent (LOIs) issued by the government against the acquisition of agricultural lands. We facilitate secure buying and selling of these high-value instruments.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-landmark"></i>
+                    <h3>Agricultural Lands</h3>
+                    <p>Expert guidance on buying and selling agricultural lands in the Mohali region, ensuring clean paperwork and future-proof investments.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-city"></i>
+                    <h3>GMADA Projects</h3>
+                    <p>Comprehensive dealing in previous and upcoming GMADA projects including but not limited to Sector 88,89, Aerocity, IT City . We bridge the gap between investors and government planning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Ongoing Projects</h2>
+            <div style="margin: 60px 0; border-top: 1px solid #e2e8f0;"></div>
+
+            <h2 class="section-title">Ready for Possession Inventory</h2>
+            <p style="text-align: center; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                We hold an exclusive inventory of allotted, ready-to-construct plots in prime GMADA sectors. Immediate transfer and clear titles guaranteed.
+            </p>
+
+            <div class="services-grid">
+                <div class="service-card" style="border-top: 3px solid var(--primary);">
+                    <i class="fas fa-home" style="color: var(--primary);"></i>
+                    <h3>Sector 88 & 89</h3>
+                    <p><strong>Residential & Commercial</strong></p>
+                    <p>Premium allotted plots available in these highly developed sectors. Perfect for immediate residence or high-rental commercial setups.</p>
+                </div>
+
+                <div class="service-card" style="border-top: 3px solid var(--primary);">
+                    <i class="fas fa-plane" style="color: var(--primary);"></i>
+                    <h3>Aerocity & IT City</h3>
+                    <p><strong>The Golden Triangle</strong></p>
+                    <p>Strategically located near the International Airport. We have showroom sites (SCOs) and residential plots ready for possession.</p>
+                </div>
+
+                <div class="service-card" style="border-top: 3px solid var(--primary);">
+                    <i class="fas fa-tree" style="color: var(--primary);"></i>
+                    <h3>Old Mohali</h3>
+                    <p><strong>Established Phases</strong></p>
+                    <p>Rare inventory in the classic, fully inhabited phases of Mohali, (Sector 76-80). Best for those seeking established neighborhoods and greenery.</p>
+                </div>
+            </div>
+            <br>
+            <h2 class="section-title">Inventory for investors</h2>
+            <div class="services-grid">
+                <div class="service-card" style="border-top: 3px solid var(--primary);">
+                    <i class="fas fa-plane" style="color: var(--primary);"></i>
+                    <h3>Aeretropolis LOIs</h3>
+                    <p><strong>Residential & Commercial</strong></p>
+                    <p>The future of Punjab's residential and commercial hub. We hold a strong inventory and expertise in Aeretropolis land pooling and LOIs.</p>
+                </div>
+                <div class="service-card" style="border-top: 3px solid var(--primary);">
+                    <i class="fas fa-leaf" style="color: var(--primary);"></i>
+                    <h3>Ecocity 3 LOIs</h3>
+                    <p><strong>Residential & Commercial</strong></p>
+                    <p>The future of Punjab's residential and commercial properties. We hold a strong inventory in Eco City 3 in both residential and commercial at WholeSale Rates.</p>
+                </div>
+                <div class="service-card" style="border-top: 3px solid var(--primary);">
+                    <i class="fas fa-home" style="color: var(--primary);"></i>
+                    <h3>Sector 90 LOIs</h3>
+                    <p><strong>The Golden Triangle</strong></p>
+                    <p>Strategically located and highly sought after. Secure your position in Sector 90 through our trusted network.</p>
+                </div>
+            </div>
+    </section>
+
+    <section class="section-padding founder" id="founder">
+        <div class="container">
+            <div class="founder-wrapper">
+                <div class="founder-text">
+                    <h2>Happy</h2>
+                    <h4 class="gold-text">Founder & Owner</h4>
+                    <p>With profound experience in the real estate sector, Happy Sir has established Sri Ambe Realtors as a pillar of trust in the Mohali region.</p>
+                    <br>
+                    <p>His expertise in team management, property dealings, and extensive government and private connections ensures that every deal required is handled with precision and transparency.</p>
+                </div>
+                <div class="founder-image">
+                    <div class="founder-img-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Visit Us</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Head Office</h4>
+                            <p>SCO-73, Ground Floor, JLPL<br>
+                            Sector-82, Mohali (PB)<br>
+                            Sahibzada Ajit Singh Nagar</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p>+91 98550-71280</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-container">
+                    <a href="https://www.google.com/maps/place/Sri+ambe+Realtors/@30.6574421,76.7348626,982m/data=!3m1!1e3!4m6!3m5!1s0x390feb9833748ffd:0x4e1eefb7c59e993c!8m2!3d30.6574375!4d76.7374375!16s%2Fg%2F11fhvnyvg0?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+                        <div class="map-placeholder">
+                            <i class="fas fa-map-marked-alt fa-2x"></i>
+                            <span style="margin-left: 10px;">Click to Open Google Maps Navigation</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<div class="whatsapp-wrapper">
+        <span class="whatsapp-text">Talk with our chatbot LOI Bazaar</span>
+        <a href="https://sanyamvatta.github.io/loi-bazaar/" class="whatsapp-float" target="_blank">
+            <i class="fas fa-robot"></i>
+        </a>
+    </div>
+
+    <div class="fixed-bottom-bar">
+        <span>Call for Inquiry:</span>
+        <a href="tel:9855071280">98550-71280</a>
+    </div>
+
+</body>
+</html>
