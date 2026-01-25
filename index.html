@@ -350,17 +350,38 @@
             font-size: 1.1rem;
         }
 
-/* --- REVERTED WHATSAPP STYLE (Prominent Green) --- */
+/* --- SMART WHATSAPP POSITIONING (Updated with Delay & Glide) --- */
         .whatsapp-wrapper {
             position: fixed;
-            bottom: 85px; 
-            right: 20px;
+            right: 20px; 
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            align-items: flex-end; 
+            align-items: flex-end;
+            bottom: auto; 
+            
+            /* THE MAGIC CHANGE:
+               top: The property we are animating
+               1.2s: Duration (Slower, so it glides, doesn't fall)
+               ease-in-out: Smooth start and end
+               0.5s: DELAY (Waits half a second before moving)
+            */
+            transition: top 1s ease-in-out 0.1s; 
         }
 
+        /* POSITION 1: INITIAL (Top Right) */
+        /* Sits nicely below the Navbar (80px) */
+        .whatsapp-pos-top {
+            top: 120px; 
+        }
+
+        /* POSITION 2: SCROLLED (Bottom Right) */
+        /* Uses % to stay near bottom regardless of screen size */
+        .whatsapp-pos-bottom {
+            top: 78%; 
+        }
+
+        /* --- BUBBLE & BUTTON STYLING (Green Version) --- */
         .whatsapp-text {
             position: relative; 
             background-color: var(--white);
@@ -371,10 +392,11 @@
             font-weight: 800; 
             border: 3px solid var(--gold);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
-            margin-bottom: 18px; 
+            margin-bottom: 12px; 
             white-space: nowrap;
         }
 
+        /* Tail points down to the button */
         .whatsapp-text::after {
             content: '';
             position: absolute;
@@ -388,7 +410,7 @@
 
         .whatsapp-float {
             background-color: #25D366; /* WhatsApp Green */
-            color: white; /* White Icon */
+            color: white; 
             width: 65px; 
             height: 65px; 
             border-radius: 50%;
@@ -396,7 +418,7 @@
             align-items: center;
             justify-content: center;
             font-size: 32px;
-            border: 3px solid var(--gold); /* Gold border for luxury feel */
+            border: 3px solid var(--gold); 
             box-shadow: 2px 5px 15px rgba(0,0,0,0.4); 
             text-decoration: none;
             animation: pop-pulse 2s infinite;
@@ -408,7 +430,6 @@
             transform: scale(1.05);
         }
 
-        /* Reverted animation shadow to Green */
         @keyframes pop-pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
             50% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
@@ -421,6 +442,45 @@
             .logo { font-size: 1.2rem; }
             .founder-image { height: 300px; }
             .founder-wrapper { flex-direction: column-reverse; }
+        }
+
+/* --- UPDATED: SIDE SCROLL ARROW (Matches Screenshot) --- */
+        .scroll-down-arrow {
+            position: absolute;
+            /* Position closer to the top to flank the text "Standard in..." */
+            top: 38%; 
+            /* Stick to the right edge */
+            right: 10px; 
+            font-size: 2.5rem; 
+            color: var(--gold);
+            text-decoration: none;
+            z-index: 10;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.8;
+            /* Animation */
+            animation: float-glow 2.5s infinite ease-in-out;
+        }
+
+        .scroll-down-arrow i {
+            /* Streches the arrow vertically to look like a long guide line */
+            transform: scaleY(2); 
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Floating & Glowing Animation */
+        @keyframes float-glow {
+            0%, 100% { 
+                transform: translateY(0); 
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translateY(15px); /* Bounces down */
+                opacity: 1;
+                text-shadow: 0 0 20px rgba(212, 175, 55, 1);
+            }
         }
     </style>
 </head>
@@ -453,6 +513,10 @@
             <p>Specializing in GMADA Projects, Letter of Intents (LOIs), and Agricultural Lands.</p>
             <a href="#contact" class="btn-gold">Start Your Investment</a>
         </div>
+
+    <a href="#services" class="scroll-down-arrow">
+            <i class="fas fa-long-arrow-alt-down"></i>
+        </a>
     </section>
 
     <section class="stats" id="about">
@@ -563,7 +627,7 @@
                 <div class="founder-text">
                     <h2>Mr. Happy</h2>
                     <h4 class="gold-text">Founder</h4>
-                    <p>With profound experience in the real estate sector, Mr. Happy has established Sri Ambe Realtors as a pillar of trust in the Mohali region.</p>
+                    <p>With significant experience in the real estate sector, Mr. Happy has established Sri Ambe Realtors as a pillar of trust in the Mohali region.</p>
                     <br>
                     <p>His expertise in team management, property dealings, and extensive government and private connections ensures that every deal required is handled with precision and transparency.</p>
                 </div>
@@ -608,17 +672,36 @@
             </div>
         </div>
     </section>
-<div class="whatsapp-wrapper">
-        <span class="whatsapp-text">Talk with our chatbot LOI Bazaar</span>
-        <a href="https://gmadaloi.com" class="whatsapp-float" target="_blank">
+<div class="whatsapp-wrapper whatsapp-pos-top">
+        <!-- <span class="whatsapp-text">Talk with our chatbot LOI Bazaar</span> -->
+        <a href="https://www.gmadaloi.com/" class="whatsapp-float" target="_blank">
             <i class="fab fa-whatsapp"></i>
         </a>
-</div>
+    </div>
+
     <div class="fixed-bottom-bar">
         <span>Call for Inquiry:</span>
         <a href="tel:9855071280">98550-71280</a>
     </div>
 
 </body>
+<script>
+        // Wait for the page to load
+        document.addEventListener('DOMContentLoaded', function() {
+            const whatsappWrapper = document.querySelector('.whatsapp-wrapper');
+            
+            window.addEventListener('scroll', function() {
+                // Check if user has scrolled down more than 100 pixels
+                if (window.scrollY > 100) {
+                    // Move to Bottom
+                    whatsappWrapper.classList.remove('whatsapp-pos-top');
+                    whatsappWrapper.classList.add('whatsapp-pos-bottom');
+                } else {
+                    // Move back to Top
+                    whatsappWrapper.classList.add('whatsapp-pos-top');
+                    whatsappWrapper.classList.remove('whatsapp-pos-bottom');
+                }
+            });
+        });
+    </script>
 </html>
-
